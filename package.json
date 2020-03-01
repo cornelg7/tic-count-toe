@@ -1,0 +1,20 @@
+{
+  "name": "tic-count-toe",
+  "version": "1.0.0",
+  "description": "tic-tac-toe but different",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cornelg7/tic-count-toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cornelg7/tic-count-toe/issues"
+  },
+  "homepage": "https://github.com/cornelg7/tic-count-toe#readme"
+}
