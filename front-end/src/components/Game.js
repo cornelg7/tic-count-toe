@@ -14,7 +14,8 @@ export class Game extends React.Component {
           <div className="game-board">
             <Board  whoseTurn={this.props.whoseTurn} 
                     whoAmI={this.props.whoAmI} 
-                    winner={this.props.winner}/>
+                    winner={this.props.winner}
+                    squares={this.props.playSquares}/>
           </div>
         </div>
       </div>

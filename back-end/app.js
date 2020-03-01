@@ -45,14 +45,17 @@ io.on("connection", socket => {
     whoseTurn: 'X',
     whoAmI: 'O',
     winner: false,
+    squares: Array(9).fill(null),
+    numberBoard: Array(9).fill(2),
   });
   socket.broadcast.emit('gameStart', {
     msg: 'You connected with another player, you can now play!',
     whoseTurn: 'X',
     whoAmI: 'X',
     winner: false,
+    squares: Array(9).fill(null),
+    numberBoard: Array(9).fill(2),
   });
-
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
