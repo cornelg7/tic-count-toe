@@ -46,7 +46,7 @@ io.on("connection", socket => {
     whoAmI: 'O',
     winner: false,
     squares: Array(9).fill(null),
-    numberBoard: Array(9).fill(2),
+    numberBoard: Array(9).fill(5),
   });
   socket.broadcast.emit('gameStart', {
     msg: 'You connected with another player, you can now play!',
@@ -54,7 +54,7 @@ io.on("connection", socket => {
     whoAmI: 'X',
     winner: false,
     squares: Array(9).fill(null),
-    numberBoard: Array(9).fill(2),
+    numberBoard: Array(9).fill(4),
   });
 });
 

@@ -11,12 +11,21 @@ function Square(props) {
 export class NumberBoard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      numberBoard: this.props.numberBoard,
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+     numberBoard: nextProps.numberBoard,
+    };
   }
 
   renderSquare(i) {
     return (
       <Square
-        value={this.props.numberBoard[i]}
+        value={this.state.numberBoard[i]}
       />
     );
   }

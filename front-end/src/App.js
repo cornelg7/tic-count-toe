@@ -35,10 +35,9 @@ class App extends Component {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
     socket.on("gameStart", data => {
-      this.setState({ gameData: data,
+      this.setState({ gameData: {...this.state.gameData, ...data},
                       error: false,
                       socket: socket });
-
     });
     socket.on("errorOfType", data => this.setState({ error: true, errorType: data }));
   }
