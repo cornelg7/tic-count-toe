@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
+const logic = require("./modules/GameLogic");
 
 const port = process.env.PORT || 4001;
 const indexRouter = require("./routes/index");
@@ -26,6 +27,8 @@ io.on("connection", socket => {
   numberOfConnections += 1;
   // socket.emit('gameStart', 'You connected!!');
 
+  socket.on('clickOnSquare', data => logic.clickOnSquareHandler(socket, data))
+
   socket.on("disconnect", () => {
     console.log("Client disconnected");
     delete connections[socket.id];
@@ -42,19 +45,19 @@ io.on("connection", socket => {
   // if (numberOfConnections == 2) // exactly one other player
   socket.emit('gameStart', {
     msg: 'You connected with another player, you can now play!',
-    whoseTurn: 'X',
+    whoseTurn: logic.whoseTurn,
     whoAmI: 'O',
-    winner: false,
-    squares: Array(9).fill(null),
-    numberBoard: Array(9).fill(5),
+    winner: logic.winner,
+    squares: logic.squares,
+    numberBoard: logic.numberBoard,
   });
   socket.broadcast.emit('gameStart', {
     msg: 'You connected with another player, you can now play!',
-    whoseTurn: 'X',
+    whoseTurn: logic.whoseTurn,
     whoAmI: 'X',
-    winner: false,
-    squares: Array(9).fill(null),
-    numberBoard: Array(9).fill(4),
+    winner: logic.winner,
+    squares: logic.squares,
+    numberBoard: logic.numberBoard,
   });
 });
 

@@ -27,6 +27,10 @@ class App extends Component {
       errorType: '',
       finishedGame: true,
       socket: false,
+      moveError: {
+        error: false, 
+        msg: '',
+      },
       endpoint: "http://127.0.0.1:4001"
     };
   }
@@ -40,10 +44,11 @@ class App extends Component {
                       socket: socket });
     });
     socket.on("errorOfType", data => this.setState({ error: true, errorType: data }));
+    socket.on('responseForClick', data => this.setState({moveError: data.moveError}));
   }
 
   render() {
-    const { gameData: {msg, whoseTurn, whoAmI, winner, numberBoard, squares}, error, errorType } = this.state;
+    const { gameData: {msg, whoseTurn, whoAmI, winner, numberBoard, squares}, error, errorType, socket, moveError } = this.state;
     return (
         <div style={{ textAlign: "center" }}>
           {error ? 
@@ -51,7 +56,12 @@ class App extends Component {
           : <div>
               <p>{msg}</p>
 
-              <Game whoseTurn={whoseTurn} whoAmI={whoAmI} winner={winner} squares={squares}/>
+              <Game whoseTurn={whoseTurn}
+                    whoAmI={whoAmI}
+                    winner={winner}
+                    squares={squares}
+                    socket={socket}
+                    moveError={moveError}/>
               
               <NumberBoard numberBoard={numberBoard} />
             </div>}

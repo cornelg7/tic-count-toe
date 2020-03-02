@@ -50,3 +50,7 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+.error-color-highlight {
+  color: #e66;
+}

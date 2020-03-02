@@ -9,7 +9,9 @@ export class Game extends React.Component {
       whoseTurn: this.props.whoseTurn,
       whoAmI: this.props.whoAmI,
       winner: this.props.winner,
-      squares: this.props.playSquares,
+      squares: this.props.squares,
+      socket: this.props.socket,
+      moveError: this.props.moveError,
     }
   }
 
@@ -18,22 +20,33 @@ export class Game extends React.Component {
       whoseTurn: nextProps.whoseTurn,
       whoAmI: nextProps.whoAmI,
       winner: nextProps.winner,
-      squares: nextProps.playSquares,
+      squares: nextProps.squares,
+      socket: nextProps.socket,
+      moveError: nextProps.moveError,
     };
   }
 
   render() {
     return (
       <div>
-        <Status whoseTurn={this.state.whoseTurn} whoAmI={this.state.whoAmI} winner={this.state.winner}/>
+        <Status whoseTurn={this.state.whoseTurn}
+                whoAmI={this.state.whoAmI}
+                winner={this.state.winner}/>
         <div className="game">
           <div className="game-board">
             <Board  whoseTurn={this.state.whoseTurn} 
                     whoAmI={this.state.whoAmI} 
                     winner={this.state.winner}
-                    squares={this.state.playSquares}/>
+                    squares={this.state.squares}
+                    socket={this.state.socket}/>
           </div>
         </div>
+        <div className="status">
+          {this.state.moveError.error
+          ? <div className="status error-color-highlight"> {this.state.moveError.msg} </div>
+          : <div></div>
+          } 
+      </div>
       </div>
     );
   }
