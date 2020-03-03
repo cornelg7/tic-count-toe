@@ -43,6 +43,11 @@ class App extends Component {
                       error: false,
                       socket: socket });
     });
+    socket.on("gameUpdate", data => {
+      this.setState({ gameData: {...this.state.gameData, ...data},
+                      error: false,
+                      socket: socket });
+    });
     socket.on("errorOfType", data => this.setState({ error: true, errorType: data }));
     socket.on('responseForClick', data => this.setState({moveError: data.moveError}));
   }

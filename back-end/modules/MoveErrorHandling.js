@@ -1,7 +1,10 @@
 class MoveErrorHandling {
   static moveErrorMessageTypes = {
-    one: 'one ee ',
-    two: 'twoooooooooooooooo ',
+    numberBoardIsZero: 'Invalid move.. The number board is 0 there!',
+    outOfTurn: 'It\'s not your turn yet..',
+    winnerAlreadyDecided: 'The game is over already!',
+    youWin: 'You Won!!',
+    youLose: 'You Lost..',
   };
   static noErrorMove() {
     return {moveError: {error: false, msg: ''}}
@@ -15,9 +18,26 @@ class MoveErrorHandling {
   }
 
   // @TODO returns true if move is valid; otherwise it sends error message.
-  static moveIsValidHandler(data, squares, numberBoard, winner, socket) {
-    this.sendResponseToClick(socket, this.errorMove(this.moveErrorMessageTypes.two));
-    // this.sendResponseToClick(socket, this.noErrorMove());
+  // data is {'whereClicked': i, 'whoClicked': this.state.whoAmI}
+  static moveIsValidHandler(data, whoseTurn, squares, prevSquares, prevMoveWasAtPos, numberBoard, winner, socket) {
+    if (winner) {
+      this.sendResponseToClick(socket, this.errorMove(this.moveErrorMessageTypes.winnerAlreadyDecided));
+      return false;
+    }
+    if (whoseTurn != data.whoClicked) { // click when not your turn
+      this.sendResponseToClick(socket, this.errorMove(this.moveErrorMessageTypes.outOfTurn));
+      return false;
+    }
+    if (numberBoard[data.whereClicked] <= 0) { // click when numberboard is zero
+      this.sendResponseToClick(socket, this.errorMove(this.moveErrorMessageTypes.numberBoardIsZero));
+      return false;
+    }
+    //if (squares[i] )
+
+    // this.sendResponseToClick(socket, this.errorMove(this.moveErrorMessageTypes.two));
+
+    this.sendResponseToClick(socket, this.noErrorMove());
+    return true;
   }
 }
 

@@ -2,6 +2,7 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const logic = require("./modules/GameLogic");
+const err = require("./modules/MoveErrorHandling");
 
 const port = process.env.PORT || 4001;
 const indexRouter = require("./routes/index");
@@ -33,6 +34,7 @@ io.on("connection", socket => {
     console.log("Client disconnected");
     delete connections[socket.id];
     numberOfConnections -= 1;
+    logic.resetTheGame();
     if (numberOfConnections > 0)
       socket.broadcast.emit('errorOfType', 'waitforplayer');
   });
@@ -59,6 +61,8 @@ io.on("connection", socket => {
     squares: logic.squares,
     numberBoard: logic.numberBoard,
   });
+  err.sendResponseToClick(socket, err.noErrorMove());
+  err.sendResponseToClick(socket.broadcast, err.noErrorMove());
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
