@@ -21,6 +21,7 @@ io.on("connection", socket => {
   console.log(`New player connected; already connected: ${numberOfConnections}`);
   if (numberOfConnections >= 2) { // too many players
     socket.emit('errorOfType', 'toomanyconnections');
+    socket.disconnect();
     return;
   }
 
