@@ -1,19 +1,35 @@
-const err = require('./MoveErrorHandling') 
+const err = require('./MoveErrorHandling');
+
+function randIntBetween(x, y) { // inclusive
+  return x + Math.floor(Math.random() * y);
+}
 
 class GameLogic {
   static whoseTurn = 'X';
   static squares = Array(9).fill(null);
   static prevSquares = Array(9).fill(null);
   static prevMoveWasAtPos = -1;
-  static numberBoard = Array(9).fill(5);
+  static numberBoard = this.randomBoardNumber();
   static winner = false;
+
+  static randomBoardNumber(maxNumberInNumberBoard = 4) {
+    let toR = Array(9).fill(0);
+    // pick random square for a chance to be 0
+    const rsquare = randIntBetween(0, 8);
+    toR[rsquare] = randIntBetween(0, maxNumberInNumberBoard);
+    // all other squares are rand 1-maxNumberInNumberBoard
+    [...Array(9).keys()].filter(e => e !== rsquare).forEach(e => {
+      toR[e] = randIntBetween(1, maxNumberInNumberBoard)
+    });
+    return toR;
+  }
 
   static resetTheGame() {
     this.whoseTurn = 'X';
     this.squares = Array(9).fill(null);
     this.prevSquares = Array(9).fill(null);
     this.prevMoveWasAtPos = -1;
-    this.numberBoard = Array(9).fill(5);
+    this.numberBoard = this.randomBoardNumber();
     this.winner = false;
   }
 
