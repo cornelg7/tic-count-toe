@@ -2,8 +2,9 @@
   "name": "tic-count-toe",
   "version": "1.0.0",
   "description": "tic-tac-toe but different",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node back-end/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
