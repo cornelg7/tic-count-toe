@@ -14,6 +14,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
   "bugs": {
     "url": "https://github.com/cornelg7/tic-count-toe/issues"
   },
