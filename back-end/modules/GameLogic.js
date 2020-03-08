@@ -46,8 +46,12 @@ class GameLogic {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (prevSquares[a] && prevSquares[a] === prevSquares[b] && prevSquares[a] === prevSquares[c]) {
-        if(prevSquares[a] === squares[a] && squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        // if no more moves == instant win
+        let numSum = this.numberBoard.reduce((acc, e) => acc + e);
+        if (numSum === 0)
+          return squares[a];
+        if(prevSquares[a] === squares[a] && prevSquares[a] && prevSquares[a] === prevSquares[b] && prevSquares[a] === prevSquares[c]) {
           // console.log(prevSquares);
           // console.log(squares);
           return squares[a];
