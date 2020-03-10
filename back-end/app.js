@@ -9,8 +9,8 @@ const indexRouter = require("./routes/index");
 const testRouter = require("./routes/test");
 
 const app = express();
-app.use(testRouter);
-// app.use(indexRouter);
+// app.use(testRouter);
+app.use(indexRouter);
 
 
 const server = http.createServer(app);

@@ -31,8 +31,8 @@ class App extends Component {
         error: false, 
         msg: '',
       },
-      // endpoint: "/",
-      endpoint: "http://127.0.0.1:4001",
+      endpoint: "/",
+      // endpoint: "http://127.0.0.1:4001",
     };
   }
 
