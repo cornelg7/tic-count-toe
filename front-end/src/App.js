@@ -31,14 +31,14 @@ class App extends Component {
         error: false, 
         msg: '',
       },
-      endpoint: "/",
-      //endpoint: "http://127.0.0.1:4001",
+      // endpoint: "/",
+      endpoint: "http://127.0.0.1:4001",
     };
   }
 
   componentDidMount() {
     const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
+    const socket = socketIOClient(endpoint, {secure: true});
     socket.on("gameStart", data => {
       this.setState({ gameData: {...this.state.gameData, ...data},
                       error: false,

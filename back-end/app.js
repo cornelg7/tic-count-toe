@@ -9,8 +9,8 @@ const indexRouter = require("./routes/index");
 const testRouter = require("./routes/test");
 
 const app = express();
-// app.use(testRouter);
-app.use(indexRouter);
+app.use(testRouter);
+// app.use(indexRouter);
 
 
 const server = http.createServer(app);
@@ -28,6 +28,8 @@ io.on("connection", socket => {
     return;
   }
 
+  // logic.setTimeoutForDisconnect(socket);
+
   connections[socket.id] = socket;
   numberOfConnections += 1;
   // socket.emit('gameStart', 'You connected!!');
@@ -44,11 +46,16 @@ io.on("connection", socket => {
   });
 
   if (numberOfConnections == 1) { // no other players
+    // logic.setTimeoutForDisconnect(socket);
     socket.emit('errorOfType', 'waitforplayer');
     return;
   }
 
   // if (numberOfConnections == 2) // exactly one other player
+
+  // reset timeouts anew
+  // logic.resetAllTheDisconnectTimers(connections);
+
   socket.emit('gameStart', {
     msg: 'You connected with another player, you can now play!',
     whoseTurn: logic.whoseTurn,

@@ -7,7 +7,9 @@ export class Status extends React.Component {
 
   render() {
     const {whoseTurn, whoAmI, winner} = this.props;
-    let status = `You are ${whoAmI}; ${winner ? `Winner is ${winner}!` : `Next player is ${whoseTurn}`}`;
+    // let nextPlayerStatus = `; Next player is ${whoseTurn}`;
+    let nextPlayerStatus = ``;
+    let status = `You are ${whoAmI}${winner ? `; Winner is ${winner}!` : nextPlayerStatus}`;
 
     return (
       <div className="status">

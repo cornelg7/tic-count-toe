@@ -8,6 +8,8 @@ function Message(props) {
     msg = 'There are already two players playing. Try connecting later..';
   else if (props.errorType === 'waitforplayer')
     msg = 'Waiting for another player..';
+  else if (props.errorType === 'inactivity')
+    msg = 'Disconnected from server due to inactivity..';
   
   return (
     <p>

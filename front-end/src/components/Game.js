@@ -44,7 +44,7 @@ export class Game extends React.Component {
         <div className="status">
           {this.state.moveError.error
           ? <div className="status error-color-highlight"> {this.state.moveError.msg} </div>
-          : <div></div>
+          : <div className="status update-color-highlight"> {this.state.moveError.msg} </div>
           } 
       </div>
       </div>
